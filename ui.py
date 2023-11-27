@@ -1,4 +1,4 @@
-import pygame, sys
+import pygame
 
 pygame.init()
 
@@ -11,16 +11,18 @@ VIEW_HEIGHT = 400
 view = pygame.display.set_mode((VIEW_HEIGHT, VIEW_WIDTH))
 pygame.display.set_caption('Sudoku')
 
+title_font = pygame.font.Font("assets/Nosifer-Regular.ttf", 45)
 font = pygame.font.Font(None, 25)
 
 
 def draw_test_title():
     view.fill(WHITE)
 
-    title = font.render('Sudoku', True, BLACK)
+    title = title_font.render('Sudoku', True, BLACK)
     title_rect = title.get_rect(center=(VIEW_WIDTH / 2, VIEW_HEIGHT / 2 - 110))
     view.blit(title, title_rect)
 
+#def draw_button(x, y):
 
 while True:
     draw_test_title()
