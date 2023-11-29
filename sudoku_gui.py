@@ -1,20 +1,12 @@
 import pygame
+from constants import *
 
 # Initializes pygame
 pygame.init()
 
-# Color constants
-BLACK = (0, 0, 0)
-WHITE = (255, 255, 255)
-GREY = (185, 185, 185)
-
-# Screen size constants
-WIDTH = 400
-HEIGHT = 400
-
 # Initialize custom fonts
-title_font = pygame.font.Font("assets/Nosifer-Regular.ttf", 45)
-button_font = pygame.font.Font(None, 25)
+title_font = pygame.font.Font(TITLE_FONT, TITLE_FONT_SIZE)
+button_font = pygame.font.Font(BUTTON_FONT, BUTTON_FONT_SIZE)
 
 # Initialize pygame screen
 view = pygame.display.set_mode((HEIGHT, WIDTH))
@@ -59,13 +51,10 @@ def draw_title(text, x_offset=0, y_offset=0, color=BLACK):
 
 # Draws button with given text label at set offset and with set colors
 def draw_button(text='', x_offset=0, y_offset=0, label_color=WHITE, button_color = BLACK):
-    # Initialize default button size
-    button_width = 80
-    button_height = 35
 
     # Draw rectangle around button label
-    button = pygame.Rect(WIDTH / 2 - (button_width / 2) + x_offset, HEIGHT / 2 - (button_height / 2) + y_offset,
-                         button_width, button_height)
+    button = pygame.Rect(WIDTH / 2 - (BUTTON_WIDTH / 2) + x_offset, HEIGHT / 2 - (BUTTON_HEIGHT / 2) + y_offset,
+                         BUTTON_WIDTH, BUTTON_HEIGHT)
     pygame.draw.rect(view, button_color, button)
 
     # Draw label on top of rectangle
@@ -84,7 +73,6 @@ while True:
     if state == 'start': # Draws out start menu if in start menu
         start_menu(mouse_position)
     #elif state == 'game':  # Draws out board if game is now being played
-
 
     for event in pygame.event.get():
         # Closes game when X is pressed
