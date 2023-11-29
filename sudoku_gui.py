@@ -1,4 +1,5 @@
 import pygame
+import sys
 from constants import *
 
 # Initializes pygame
@@ -16,7 +17,8 @@ pygame.display.set_caption('Sudoku')
 view.fill(WHITE)
 
 # State keeps track of what menus should be shown. "start" is the start menu and "game" is the sudoku game
-state = 'start'
+state = 'game'
+
 
 # Draws out title and updates buttons on start menu
 def start_menu(mouse_pos):
@@ -40,6 +42,61 @@ def start_menu(mouse_pos):
         draw_button('hard', y_offset=100, button_color=GREY, label_color=WHITE)
     else:
         draw_button('hard', y_offset=100)
+
+
+def game_board():
+    draw_grid()
+
+
+def draw_grid():
+    # Adds extra space created by lines so grid is still accurate
+    extra_space = 0
+
+    # Draws horizontal lines
+    for i in range(1, ROWS):
+        if i % 3 == 0:  # Draws bold lines
+            extra_space += BOLD_LINE_WIDTH
+            pygame.draw.line(
+                view,
+                BLACK,
+                (0, CELL_SIZE * i + extra_space),
+                (WIDTH, CELL_SIZE * i + extra_space),
+                BOLD_LINE_WIDTH
+            )
+        else:  # Draws thinner lines
+            extra_space += THIN_LINE_WIDTH
+            pygame.draw.line(
+                view,
+                BLACK,
+                (0, CELL_SIZE * i + extra_space),
+                (WIDTH, CELL_SIZE * i + extra_space),
+                THIN_LINE_WIDTH
+            )
+
+    extra_space = 0  # Resets extra space
+
+    # Draws vertical lines
+    for i in range(1, ROWS):
+        if i % 3 == 0:  # Draws bold lines
+            extra_space += BOLD_LINE_WIDTH
+            pygame.draw.line(
+                view,
+                BLACK,
+                (CELL_SIZE * i + extra_space, 0),
+                (CELL_SIZE * i + extra_space, HEIGHT),
+                BOLD_LINE_WIDTH
+            )
+        else:  # Draws thinner lines
+            extra_space += THIN_LINE_WIDTH
+            pygame.draw.line(
+                view,
+                BLACK,
+                (CELL_SIZE * i + extra_space, 0),
+                (CELL_SIZE * i + extra_space, HEIGHT),
+                THIN_LINE_WIDTH
+            )
+
+
 
 
 # Draw title at center of screen with given offset
@@ -70,14 +127,16 @@ while True:
     # Read and store current mouse position
     mouse_position = pygame.mouse.get_pos()
 
-    if state == 'start': # Draws out start menu if in start menu
+    if state == 'start':  # Draws out start menu if in start menu
         start_menu(mouse_position)
+    if state == 'game':
+        game_board()
 
     for event in pygame.event.get():
         # Closes game when X is pressed
         if event.type == pygame.QUIT:
             pygame.quit()
-            quit()
+            sys.exit()
 
     # Updates visuals on screen every frame
     pygame.display.update()
