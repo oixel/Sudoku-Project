@@ -23,8 +23,12 @@ BUTTON_FONT_SIZE = 20
 BUTTON_WIDTH = 80
 BUTTON_HEIGHT = 35
 
-# Grid constants
+# Game board constants
 ROWS = 9
 CELL_SIZE = 50
 BOLD_LINE_WIDTH = 5
 THIN_LINE_WIDTH = 3
+
+NUMBER_FONT = "assets/Poppins-Bold.ttf"
+NUMBER_FONT_SIZE = 45
+
