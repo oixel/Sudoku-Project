@@ -23,6 +23,9 @@ pygame.display.set_caption('Sudoku')
 # Fill background color
 view.fill(WHITE)
 
+# State keeps track of what menus should be shown. "start" is the start menu and "game" is the sudoku game
+state = 'start'
+
 # Draws out title and updates buttons on start menu
 def start_menu(mouse_pos):
     # Draw sudoku title at top of screen
@@ -78,8 +81,10 @@ while True:
     # Read and store current mouse position
     mouse_position = pygame.mouse.get_pos()
 
-    # Draws out start menu
-    start_menu(mouse_position)
+    if state == 'start': # Draws out start menu if in start menu
+        start_menu(mouse_position)
+    #elif state == 'game':  # Draws out board if game is now being played
+
 
     for event in pygame.event.get():
         # Closes game when X is pressed
