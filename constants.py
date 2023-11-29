@@ -1,6 +1,14 @@
+"""
+    How I calculated screen size:
+    50 * 9 = 450 (For cells)
+    2 * 5 = 10 (For bold lines)
+    6 * 3 = 18 (For thin lines)
+    Total = 478
+"""
+
 # Screen size constants
-WIDTH = 400
-HEIGHT = 400
+WIDTH = 478
+HEIGHT = 478
 
 # Color constants
 BLACK = (0, 0, 0)
@@ -16,6 +24,7 @@ BUTTON_WIDTH = 80
 BUTTON_HEIGHT = 35
 
 # Grid constants
-SQUARE_SIZE = 200
 ROWS = 9
-COLUMNS = 9
+CELL_SIZE = 50
+BOLD_LINE_WIDTH = 5
+THIN_LINE_WIDTH = 3
