@@ -3,8 +3,8 @@ from constants import *
 
 
 # Draw title at center of screen with given offset
-def draw_title(text, x_offset=0, y_offset=0, color=BLACK):
-    title = title_font.render(text, True, color)
+def draw_title(view, font, text, x_offset=0, y_offset=0, color=BLACK):
+    title = font.render(text, True, color)
     title_rect = title.get_rect(center=(WIDTH / 2 + x_offset, HEIGHT / 2 + y_offset))
     view.blit(title, title_rect)
 
