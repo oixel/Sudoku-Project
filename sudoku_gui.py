@@ -1,6 +1,7 @@
 import pygame
 import sys
 from constants import *
+from gui_tools import *
 
 # Initializes pygame
 pygame.init()
@@ -8,6 +9,7 @@ pygame.init()
 # Initialize custom fonts
 title_font = pygame.font.Font(TITLE_FONT, TITLE_FONT_SIZE)
 button_font = pygame.font.Font(BUTTON_FONT, BUTTON_FONT_SIZE)
+number_font = pygame.font.Font(NUMBER_FONT, NUMBER_FONT_SIZE)
 
 # Initialize pygame screen
 view = pygame.display.set_mode((HEIGHT, WIDTH))
@@ -21,106 +23,41 @@ state = 'game'
 
 
 # Draws out title and updates buttons on start menu
-def start_menu(mouse_pos):
+def draw_start_menu(mouse_pos):
     # Draw sudoku title at top of screen
     draw_title('Sudoku', y_offset=-110)
 
     # If mouse is hovering over easy button, change colors
     if draw_button().collidepoint(mouse_pos):
-        draw_button('easy', button_color=GREY, label_color=WHITE)
+        draw_button(view, button_font, 'easy', button_color=GREY, label_color=WHITE)
     else:
-        draw_button('easy')
+        draw_button(view, button_font, 'easy')
 
     # If mouse is hovering over medium button, change colors
     if draw_button(y_offset=50).collidepoint(mouse_pos):
-        draw_button('medium', y_offset=50, button_color=GREY, label_color=WHITE)
+        draw_button(view, button_font, 'medium', y_offset=50, button_color=GREY, label_color=WHITE)
     else:
-        draw_button('medium', y_offset=50)
+        draw_button(view, button_font, 'medium', y_offset=50)
 
     # If mouse is hovering over hard button, change colors
     if draw_button(y_offset=100).collidepoint(mouse_pos):
-        draw_button('hard', y_offset=100, button_color=GREY, label_color=WHITE)
+        draw_button(view, button_font, 'hard', y_offset=100, button_color=GREY, label_color=WHITE)
     else:
-        draw_button('hard', y_offset=100)
+        draw_button(view, button_font, 'hard', y_offset=100)
 
 
-def game_board():
-    draw_grid()
+def draw_game_board():
+    draw_grid(view)
 
-
-def draw_grid():
-    # Adds extra space created by lines so grid is still accurate
-    extra_space = 0
-
-    # Draws horizontal lines
-    for i in range(1, ROWS):
-        if i % 3 == 0:  # Draws bold lines
-            extra_space += BOLD_LINE_WIDTH
-            pygame.draw.line(
-                view,
-                BLACK,
-                (0, CELL_SIZE * i + extra_space),
-                (WIDTH, CELL_SIZE * i + extra_space),
-                BOLD_LINE_WIDTH
-            )
-        else:  # Draws thinner lines
-            extra_space += THIN_LINE_WIDTH
-            pygame.draw.line(
-                view,
-                BLACK,
-                (0, CELL_SIZE * i + extra_space),
-                (WIDTH, CELL_SIZE * i + extra_space),
-                THIN_LINE_WIDTH
-            )
-
-    extra_space = 0  # Resets extra space
-
-    # Draws vertical lines
-    for i in range(1, ROWS):
-        if i % 3 == 0:  # Draws bold lines
-            extra_space += BOLD_LINE_WIDTH
-            pygame.draw.line(
-                view,
-                BLACK,
-                (CELL_SIZE * i + extra_space, 0),
-                (CELL_SIZE * i + extra_space, HEIGHT),
-                BOLD_LINE_WIDTH
-            )
-        else:  # Draws thinner lines
-            extra_space += THIN_LINE_WIDTH
-            pygame.draw.line(
-                view,
-                BLACK,
-                (CELL_SIZE * i + extra_space, 0),
-                (CELL_SIZE * i + extra_space, HEIGHT),
-                THIN_LINE_WIDTH
-            )
-
-
-
-
-# Draw title at center of screen with given offset
-def draw_title(text, x_offset=0, y_offset=0, color=BLACK):
-    title = title_font.render(text, True, color)
-    title_rect = title.get_rect(center=(WIDTH / 2 + x_offset, HEIGHT / 2 + y_offset))
-    view.blit(title, title_rect)
-
-
-# Draws button with given text label at set offset and with set colors
-def draw_button(text='', x_offset=0, y_offset=0, label_color=WHITE, button_color = BLACK):
-
-    # Draw rectangle around button label
-    button = pygame.Rect(WIDTH / 2 - (BUTTON_WIDTH / 2) + x_offset, HEIGHT / 2 - (BUTTON_HEIGHT / 2) + y_offset,
-                         BUTTON_WIDTH, BUTTON_HEIGHT)
-    pygame.draw.rect(view, button_color, button)
-
-    # Draw label on top of rectangle
-    label = button_font.render(text, True, label_color)
-    label_rect = label.get_rect(center=(WIDTH / 2 + x_offset, HEIGHT / 2 + y_offset))
-    view.blit(label, label_rect)
-
-    # Return rectangle to check position
-    return button
+    draw_number(view, number_font, 1, 4, 4)
+    draw_number(view, number_font, 2, 4, 5)
+    draw_number(view, number_font, 3, 4, 6)
+    draw_number(view, number_font, 4, 5, 4)
+    draw_number(view, number_font, 5, 5, 5)
+    draw_number(view, number_font, 6, 5, 6)
+    draw_number(view, number_font, 7, 6, 4)
+    draw_number(view, number_font, 8, 6, 5)
+    draw_number(view, number_font, 9, 6, 6)
 
 
 while True:
@@ -128,9 +65,9 @@ while True:
     mouse_position = pygame.mouse.get_pos()
 
     if state == 'start':  # Draws out start menu if in start menu
-        start_menu(mouse_position)
-    if state == 'game':
-        game_board()
+        draw_start_menu(mouse_position)
+    elif state == 'game':  # Draws out game board and grid if in game
+        draw_game_board()
 
     for event in pygame.event.get():
         # Closes game when X is pressed
