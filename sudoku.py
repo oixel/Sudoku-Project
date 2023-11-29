@@ -1,7 +1,7 @@
 import pygame
 import sys
 from constants import *
-from gui_tools import *
+import gui_tools
 
 # Initializes pygame
 pygame.init()
@@ -25,39 +25,39 @@ state = 'game'
 # Draws out title and updates buttons on start menu
 def draw_start_menu(mouse_pos):
     # Draw sudoku title at top of screen
-    draw_title('Sudoku', y_offset=-110)
+    gui_tools.draw_title(view, title_font, 'Sudoku', y_offset=-110)
 
     # If mouse is hovering over easy button, change colors
-    if draw_button().collidepoint(mouse_pos):
-        draw_button(view, button_font, 'easy', button_color=GREY, label_color=WHITE)
+    if gui_tools.draw_button(view, button_font).collidepoint(mouse_pos):
+        gui_tools.draw_button(view, button_font, 'easy', button_color=GREY, label_color=WHITE)
     else:
-        draw_button(view, button_font, 'easy')
+        gui_tools.draw_button(view, button_font, 'easy')
 
     # If mouse is hovering over medium button, change colors
-    if draw_button(y_offset=50).collidepoint(mouse_pos):
-        draw_button(view, button_font, 'medium', y_offset=50, button_color=GREY, label_color=WHITE)
+    if gui_tools.draw_button(view, button_font, y_offset=50).collidepoint(mouse_pos):
+        gui_tools.draw_button(view, button_font, 'medium', y_offset=50, button_color=GREY, label_color=WHITE)
     else:
-        draw_button(view, button_font, 'medium', y_offset=50)
+        gui_tools.draw_button(view, button_font, 'medium', y_offset=50)
 
     # If mouse is hovering over hard button, change colors
-    if draw_button(y_offset=100).collidepoint(mouse_pos):
-        draw_button(view, button_font, 'hard', y_offset=100, button_color=GREY, label_color=WHITE)
+    if gui_tools.draw_button(view, button_font, y_offset=100).collidepoint(mouse_pos):
+        gui_tools.draw_button(view, button_font, 'hard', y_offset=100, button_color=GREY, label_color=WHITE)
     else:
-        draw_button(view, button_font, 'hard', y_offset=100)
+        gui_tools.draw_button(view, button_font, 'hard', y_offset=100)
 
 
 def draw_game_board():
-    draw_grid(view)
+    gui_tools.draw_grid(view)
 
-    draw_number(view, number_font, 1, 4, 4)
-    draw_number(view, number_font, 2, 4, 5)
-    draw_number(view, number_font, 3, 4, 6)
-    draw_number(view, number_font, 4, 5, 4)
-    draw_number(view, number_font, 5, 5, 5)
-    draw_number(view, number_font, 6, 5, 6)
-    draw_number(view, number_font, 7, 6, 4)
-    draw_number(view, number_font, 8, 6, 5)
-    draw_number(view, number_font, 9, 6, 6)
+    gui_tools.draw_number(view, number_font, 1, 4, 4)
+    gui_tools.draw_number(view, number_font, 2, 4, 5)
+    gui_tools.draw_number(view, number_font, 3, 4, 6)
+    gui_tools.draw_number(view, number_font, 4, 5, 4)
+    gui_tools.draw_number(view, number_font, 5, 5, 5)
+    gui_tools.draw_number(view, number_font, 6, 5, 6)
+    gui_tools.draw_number(view, number_font, 7, 6, 4)
+    gui_tools.draw_number(view, number_font, 8, 6, 5)
+    gui_tools.draw_number(view, number_font, 9, 6, 6)
 
 
 while True:
@@ -74,6 +74,17 @@ while True:
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
+
+        #
+        # THIS IS STRICTLY FOR DEBUGGING, DELETE FROM FINAL PRODUCT
+        #
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_TAB:
+                view.fill(WHITE)
+                state = 'game' if state == 'start' else 'start'
+        #
+        #
+        #
 
     # Updates visuals on screen every frame
     pygame.display.update()
