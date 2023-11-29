@@ -19,7 +19,7 @@ pygame.display.set_caption('Sudoku')
 view.fill(WHITE)
 
 # State keeps track of what menus should be shown. "start" is the start menu and "game" is the sudoku game
-state = 'game'
+state = 'start'
 
 
 # Draws out title and updates buttons on start menu
