@@ -72,7 +72,6 @@ while True:
 
     if state == 'start': # Draws out start menu if in start menu
         start_menu(mouse_position)
-    #elif state == 'game':  # Draws out board if game is now being played
 
     for event in pygame.event.get():
         # Closes game when X is pressed
