@@ -13,7 +13,7 @@ HEIGHT = 478
 # Color constants
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
-GREY = (185, 185, 185)
+HIGHLIGHT = (185, 185, 185)
 
 # Start menu constants
 TITLE_FONT = "assets/Nosifer-Regular.ttf"
