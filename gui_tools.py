@@ -90,16 +90,41 @@ def get_extra_space(num):
 
 
 # Draw given number in specified row and column
-def draw_number(view, font, num, row, col):
+def draw_number(view, font, num: str, row, col):
     # Calculated offset that is needed for the number to be centered in cell
     extra_x = get_extra_space(col)
     extra_y = get_extra_space(row)
 
     # Calculates number's center values
-    x = col * CELL_SIZE + extra_x - (NUMBER_FONT_SIZE / 2)
-    y = row * CELL_SIZE + extra_y - (NUMBER_FONT_SIZE / 2)
+    x = (col * CELL_SIZE) + extra_x - (NUMBER_FONT_SIZE / 2)
+    y = (row * CELL_SIZE) + extra_y - (NUMBER_FONT_SIZE / 2)
 
     # Renders number in desired row and column
-    num_surface = font.render(str(num), 2, BLACK)
+    num_surface = font.render(num, 2, BLACK)
     num_rect = num_surface.get_rect(center=(x, y))
     view.blit(num_surface, num_rect)
+
+
+# Gets row and column of cell that mouse clicks
+def get_clicked_cell(mouse_position):
+    # Stores count of cells horizontal and vertical from where the mouse is pressed
+    # The [0] value represents total cells while the [1] value represents the amount of 3rd cells present
+    counts_x = [mouse_position[0] // CELL_SIZE, mouse_position[0] // (CELL_SIZE * 3)]
+    counts_y = [mouse_position[1] // CELL_SIZE, mouse_position[1] // (CELL_SIZE * 3)]
+
+    # Math explanation:
+    # For every cell that is not followed by a bold line, there is a 3px gap created by the thin lines of the grid
+    # For every third cell there is an extra gap of 5px created by the bold lines of the grid
+    # So we have to take the difference between the two line widths because otherwise we would be adding
+    # an unnecessary +3 pixels to the offset.
+    # That way instead of having an incorrect offset of 14, we get a correct offset of 11!
+    x_offset = counts_x[0] * THIN_LINE_WIDTH + counts_x[1] * (BOLD_LINE_WIDTH - THIN_LINE_WIDTH)
+    y_offset = counts_y[0] * THIN_LINE_WIDTH + counts_y[1] * (BOLD_LINE_WIDTH - THIN_LINE_WIDTH)
+
+    # We add 1 to the row and column locations because we do not have a zero column or row
+    # And if we click on the first cell it would normally be 0, 0 without the increment
+    row = (mouse_position[1] - y_offset) // CELL_SIZE + 1
+    column = (mouse_position[0] - x_offset) // CELL_SIZE + 1
+
+    # Returns clicked row and column!
+    return row, column
