@@ -49,16 +49,6 @@ def draw_start_menu(mouse_pos):
 def draw_game_board():
     gui_tools.draw_grid(view)
 
-    gui_tools.draw_number(view, number_font, 1, 4, 4)
-    gui_tools.draw_number(view, number_font, 2, 4, 5)
-    gui_tools.draw_number(view, number_font, 3, 4, 6)
-    gui_tools.draw_number(view, number_font, 4, 5, 4)
-    gui_tools.draw_number(view, number_font, 5, 5, 5)
-    gui_tools.draw_number(view, number_font, 6, 5, 6)
-    gui_tools.draw_number(view, number_font, 7, 6, 4)
-    gui_tools.draw_number(view, number_font, 8, 6, 5)
-    gui_tools.draw_number(view, number_font, 9, 6, 6)
-
 
 while True:
     # Read and store current mouse position
@@ -74,6 +64,10 @@ while True:
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
+
+        if event.type == pygame.MOUSEBUTTONDOWN and state == 'game':
+            row, column = gui_tools.get_clicked_cell(mouse_position)
+            gui_tools.draw_number(view, number_font, '0', row, column)
 
         #
         # THIS IS STRICTLY FOR DEBUGGING, DELETE FROM FINAL PRODUCT
