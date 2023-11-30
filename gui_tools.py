@@ -129,6 +129,7 @@ def get_clicked_cell(mouse_position):
     # Returns clicked row and column!
     return row, column
 
+
 # Fills cell in given column and row with the desired color
 def color_cell(view, col, row, color):
     # Calculates offset that is needed for the blank square to be centered in cell
