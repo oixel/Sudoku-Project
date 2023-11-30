@@ -33,19 +33,19 @@ def draw_start_menu(mouse_pos):
 
     # If mouse is hovering over easy button, change colors
     if gui_tools.draw_button(view, button_font).collidepoint(mouse_pos):
-        gui_tools.draw_button(view, button_font, 'easy', button_color=GREY, label_color=WHITE)
+        gui_tools.draw_button(view, button_font, 'easy', button_color=HIGHLIGHT, label_color=WHITE)
     else:
         gui_tools.draw_button(view, button_font, 'easy')
 
     # If mouse is hovering over medium button, change colors
     if gui_tools.draw_button(view, button_font, y_offset=50).collidepoint(mouse_pos):
-        gui_tools.draw_button(view, button_font, 'medium', y_offset=50, button_color=GREY, label_color=WHITE)
+        gui_tools.draw_button(view, button_font, 'medium', y_offset=50, button_color=HIGHLIGHT, label_color=WHITE)
     else:
         gui_tools.draw_button(view, button_font, 'medium', y_offset=50)
 
     # If mouse is hovering over hard button, change colors
     if gui_tools.draw_button(view, button_font, y_offset=100).collidepoint(mouse_pos):
-        gui_tools.draw_button(view, button_font, 'hard', y_offset=100, button_color=GREY, label_color=WHITE)
+        gui_tools.draw_button(view, button_font, 'hard', y_offset=100, button_color=HIGHLIGHT, label_color=WHITE)
     else:
         gui_tools.draw_button(view, button_font, 'hard', y_offset=100)
 
