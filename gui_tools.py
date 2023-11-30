@@ -91,7 +91,7 @@ def get_extra_space(num):
 
 # Draw given number in specified row and column
 def draw_number(view, font, num: str, row, col):
-    # Calculated offset that is needed for the number to be centered in cell
+    # Calculates offset that is needed for the number to be centered in cell
     extra_x = get_extra_space(col)
     extra_y = get_extra_space(row)
 
@@ -128,3 +128,16 @@ def get_clicked_cell(mouse_position):
 
     # Returns clicked row and column!
     return row, column
+
+# Fills cell in given column and row with the desired color
+def color_cell(view, col, row, color):
+    # Calculates offset that is needed for the blank square to be centered in cell
+    extra_x = get_extra_space(row)
+    extra_y = get_extra_space(col)
+
+    # Places square in center of cell
+    x = (row * CELL_SIZE) - CELL_SIZE + extra_x
+    y = (col * CELL_SIZE) - CELL_SIZE + extra_y
+
+    # Draws a square a little bigger than the cell to completely fill cell slot
+    pygame.draw.rect(view, color, (x, y, CELL_SIZE + 3, CELL_SIZE + 3))
