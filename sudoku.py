@@ -12,7 +12,7 @@ button_font = pygame.font.Font(BUTTON_FONT, BUTTON_FONT_SIZE)
 number_font = pygame.font.Font(NUMBER_FONT, NUMBER_FONT_SIZE)
 
 # Initialize pygame screen
-view = pygame.display.set_mode((HEIGHT, WIDTH))
+view = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption('Sudoku')
 
 # Fill background color

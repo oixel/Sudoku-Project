@@ -4,11 +4,13 @@
     2 * 5 = 10 (For bold lines)
     6 * 3 = 18 (For thin lines)
     Total = 478
+    + 50px for the extra buttons
+    528 pxs!
 """
 
 # Screen size constants
 WIDTH = 478
-HEIGHT = 478
+HEIGHT = 528
 
 # Color constants
 BLACK = (0, 0, 0)

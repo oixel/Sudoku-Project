@@ -32,7 +32,7 @@ def draw_grid(view):
     extra_space = 0
 
     # Draws horizontal lines
-    for i in range(1, ROWS):
+    for i in range(1, ROWS + 1):
         if i % 3 == 0:  # Draws bold grid lines
             extra_space += BOLD_LINE_WIDTH  # Adds line's width to offset to keep everything accurate
             pygame.draw.line(
@@ -62,7 +62,7 @@ def draw_grid(view):
                 view,
                 BLACK,
                 (CELL_SIZE * i + extra_space, 0),
-                (CELL_SIZE * i + extra_space, HEIGHT),
+                (CELL_SIZE * i + extra_space, HEIGHT - 45),
                 BOLD_LINE_WIDTH
             )
         else:  # Draws thinner grid lines
@@ -71,7 +71,7 @@ def draw_grid(view):
                 view,
                 BLACK,
                 (CELL_SIZE * i + extra_space, 0),
-                (CELL_SIZE * i + extra_space, HEIGHT),
+                (CELL_SIZE * i + extra_space, HEIGHT - 45),
                 THIN_LINE_WIDTH
             )
 
